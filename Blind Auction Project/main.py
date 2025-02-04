@@ -11,6 +11,5 @@ while True:
         print("\n"*50)
     elif option=='no':
         break
-# TODO-4: Compare bids in dictionary
 highest=max(bidders,key=bidders.get)
 print(f"The winner is {highest} with a bid of {bidders[highest]}")
