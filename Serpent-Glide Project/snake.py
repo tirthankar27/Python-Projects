@@ -5,12 +5,15 @@ class Snake:
     def __init__(self):
         self.snakes=list()
         self.current_position=(0,0)
+        self.head=None
         for i in range(3):
             self.snakes.append(Turtle(shape='square'))
             self.snakes[i].color('white')
             self.snakes[i].penup()
             self.snakes[i].shapesize(0.5)
             self.snakes[i].goto(x=-i * 10, y=0)
+            if i==0:
+                self.head=self.snakes[i]
 
     def add_segment(self):
         new_segment=Turtle(shape='square')

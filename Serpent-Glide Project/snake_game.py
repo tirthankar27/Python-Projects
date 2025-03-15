@@ -22,17 +22,23 @@ my_screen.onkey(key="Right",fun=serpent.right)
 is_game_on=True
 current_position=(0,0)
 while is_game_on:
-    my_score.writer.write(f"Score: {my_score.score}", align='center', font=('Arial', 12, 'bold'))
+    my_score.scoreboard()
     my_screen.update()
     time.sleep(0.1)
     if serpent.snakes[0].xcor()>280 or serpent.snakes[0].xcor()<-280 or serpent.snakes[0].ycor()>280 or serpent.snakes[0].ycor()<-280:
         is_game_on = False
-        break
+        my_score.game_over()
     serpent.move_forward()
     if serpent.snakes[0].distance(food) < 10:
         food.update_position()
         serpent.add_segment()
         my_score.update_score()
+    for segment in serpent.snakes:
+        if segment == serpent.head:
+            pass
+        elif serpent.head.distance(segment)<5:
+            is_game_on=False
+            my_score.game_over()
+            break
 
 my_screen.exitonclick()
-print(f"Game over! Your total score is {my_score.score}")
