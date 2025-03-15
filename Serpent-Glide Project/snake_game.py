@@ -22,9 +22,9 @@ my_screen.onkey(key="Right",fun=serpent.right)
 is_game_on=True
 current_position=(0,0)
 while is_game_on:
+    my_score.writer.write(f"Score: {my_score.score}", align='center', font=('Arial', 12, 'bold'))
     my_screen.update()
     time.sleep(0.1)
-    my_score.writer.write(f"Score: {my_score.score}",align='center',font=('Arial',12,'bold'))
     if serpent.snakes[0].xcor()>280 or serpent.snakes[0].xcor()<-280 or serpent.snakes[0].ycor()>280 or serpent.snakes[0].ycor()<-280:
         is_game_on = False
         break
