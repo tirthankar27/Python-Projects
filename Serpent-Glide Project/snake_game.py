@@ -33,10 +33,8 @@ while is_game_on:
         food.update_position()
         serpent.add_segment()
         my_score.update_score()
-    for segment in serpent.snakes:
-        if segment == serpent.head:
-            pass
-        elif serpent.head.distance(segment)<5:
+    for segment in serpent.snakes[1:]:
+        if serpent.head.distance(segment)<5:
             is_game_on=False
             my_score.game_over()
             break
