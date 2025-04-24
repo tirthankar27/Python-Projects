@@ -1,0 +1,10 @@
+import pandas as pd
+data=pd.read_csv("squirrel_data.csv")
+new_dict=dict()
+grey_squirrels_count=len(data[data['Primary Fur Color']=='Gray'])
+cinnamon_squirrels_count=len(data[data['Primary Fur Color']=='Cinnamon'])
+white_squirrels_count=len(data[data['Primary Fur Color']=='White'])
+new_dict.setdefault('Fur color',['Gray','Cinnamon','White'])
+new_dict.setdefault('Count',[grey_squirrels_count,cinnamon_squirrels_count,white_squirrels_count])
+new_df=pd.DataFrame(new_dict)
+new_df.to_csv('squirrel_count.csv')
