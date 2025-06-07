@@ -1,7 +1,4 @@
 from turtle import Turtle
-import pandas as pd
-from patsy.state import center
-
 
 class Write(Turtle):
     def __init__(self):
