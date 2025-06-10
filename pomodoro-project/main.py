@@ -17,7 +17,8 @@ job_id=""
 def reset_timer():
     global job_id
     global count
-    window.after_cancel(job_id)
+    if job_id!="":
+        window.after_cancel(job_id)
     canvas.itemconfig(timer_id, text=f"00:00")
     pomodoro_counter_label.config(text="")
     timer_label.config(text="Timer",fg=GREEN)
@@ -78,13 +79,13 @@ canvas.grid(row=1,column=1)
 timer_label=Label(text="Timer",bg=YELLOW,font=(FONT_NAME,38,'bold'),fg=GREEN)
 timer_label.grid(row=0,column=1)
 
-start=Button(text="Start",command=pomodoro)
+start=Button(text="Start",command=pomodoro,fg=GREEN,bg=YELLOW,borderwidth=0,font=(FONT_NAME,38))
 start.grid(row=2,column=0)
 
 pomodoro_counter_label=Label(text="",bg=YELLOW,font=(FONT_NAME,12,'bold'),fg=GREEN)
 pomodoro_counter_label.grid(row=3,column=1)
 
-reset=Button(text="Reset",command=reset_timer)
+reset=Button(text="Reset",command=reset_timer,fg=RED,bg=YELLOW,borderwidth=0,font=(FONT_NAME,38))
 reset.grid(row=2,column=2)
 
 window.mainloop()
