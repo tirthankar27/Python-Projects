@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from random import randint,choice,shuffle
+import json
 import pyperclip
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
@@ -31,8 +32,26 @@ def insert_entries():
         return
     is_ok=messagebox.askyesno(title="Proceed?",message="Do you want to save?")
     if is_ok:
-        with open("my_passwords.txt",mode='a') as file:
-            file.write(f"{website_entry.get()} || {user_entry.get()} || {password_entry.get()}\n")
+        website_val=website_entry.get()
+        email=user_entry.get()
+        password_val=password_entry.get()
+        new_data={
+            website_val:{
+                "email":email,
+                "password":password_val
+            }
+        }
+        with open("my_passwords.json",mode='r') as data_file:
+            content=data_file.read()
+            if not content.strip():
+                data=new_data
+            else:
+                data=json.loads(content)
+                data.update(new_data)
+        with open("my_passwords.json", mode='w') as data_file:
+            json.dump(data,data_file,indent=4)
+        messagebox.showinfo(title="Success!",
+                            message=f"Your details with:\nWebsite: {website_val}\nEmail: {email}\nPassword: {password_val}\n got saved!")
         website_entry.delete(0,END)
         user_entry.delete(0,END)
         password_entry.delete(0,END)
