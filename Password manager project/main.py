@@ -63,7 +63,7 @@ def insert_entries():
         with open("my_passwords.json",mode='r') as data_file:
             try:
                 data=json.load(data_file)
-            except FileNotFoundError:
+            except (FileNotFoundError,json.decoder.JSONDecodeError):
                 data=new_data
             else:
                 data.update(new_data)
