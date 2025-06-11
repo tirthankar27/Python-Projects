@@ -25,6 +25,20 @@ def generate_my_password():
     password_entry.insert(END,my_password)
     pyperclip.copy(my_password)
 
+# ---------------------------- SEARCH ------------------------------- #
+
+def search_details():
+    website_val=website_entry.get()
+    with open("my_passwords.json",mode='r') as data_file:
+        data=json.load(data_file)
+        if website_val in data:
+            password_val=data[website_val]['password']
+            email=data[website_val]['email']
+            messagebox.showinfo(title=f"Details found for {website_val}",message=f"Email: {email}\nPassword: {password_val}")
+        else:
+            messagebox.showerror(title=f"Details not found for {website_val}",
+                                message="No details found! Please check the Webstie")
+
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def insert_entries():
     if website_entry.get()=="" or user_entry.get()=="" or password_entry.get()=="":
@@ -42,11 +56,11 @@ def insert_entries():
             }
         }
         with open("my_passwords.json",mode='r') as data_file:
-            content=data_file.read()
-            if not content.strip():
+            try:
+                data=json.load(data_file)
+            except FileNotFoundError:
                 data=new_data
             else:
-                data=json.loads(content)
                 data.update(new_data)
         with open("my_passwords.json", mode='w') as data_file:
             json.dump(data,data_file,indent=4)
@@ -68,9 +82,9 @@ canvas.grid(row=0,column=1)
 
 website=Label(text="Website:")
 website.grid(row=1,column=0)
-website_entry=Entry(width=52)
+website_entry=Entry(width=34)
 website_entry.focus()
-website_entry.grid(row=1,column=1,columnspan=2)
+website_entry.grid(row=1,column=1)
 
 mail_username=Label(text="Email/Username:")
 mail_username.grid(row=2,column=0)
@@ -81,6 +95,9 @@ password=Label(text="Password:")
 password.grid(row=3,column=0)
 password_entry=Entry(width=34)
 password_entry.grid(row=3,column=1)
+
+search_button=Button(text="Search",width=14,command=search_details)
+search_button.grid(row=1,column=2)
 
 generate_password=Button(text="Generate Password",width=14,command=generate_my_password)
 generate_password.grid(row=3,column=2)
