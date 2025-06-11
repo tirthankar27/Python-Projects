@@ -29,8 +29,13 @@ def generate_my_password():
 
 def search_details():
     website_val=website_entry.get()
-    with open("my_passwords.json",mode='r') as data_file:
-        data=json.load(data_file)
+    try:
+        with open("my_passwords.json", mode='r') as data_file:
+            data=json.load(data_file)
+    except (FileNotFoundError,json.decoder.JSONDecodeError):
+        messagebox.showerror(title=f"Details not found for {website_val}",
+                                message="No details found! Please check the Webstie")
+    else:
         if website_val in data:
             password_val=data[website_val]['password']
             email=data[website_val]['email']
