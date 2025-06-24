@@ -9,10 +9,10 @@ driver = webdriver.Chrome(options=chrome_options)
 driver.get("https://www.pythonanywhere.com/login/")
 
 user_name=driver.find_element(By.NAME, value='auth-username')
-user_name.send_keys('tirthankarghosh4@gmail.com')
+user_name.send_keys('user-id')
 
 user_password=driver.find_element(By.NAME, value='auth-password')
-user_password.send_keys('&0r1va*FLU5#DoM4')
+user_password.send_keys('password')
 
 login=driver.find_element(By.ID, value='id_next')
 login.click()
